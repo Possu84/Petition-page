@@ -1,0 +1,130 @@
+* {
+    margin: 0 auto;
+    text-align: center;
+}
+
+body {
+    background-image: url('./park.jpg');
+    background-repeat: no-repeat;
+}
+
+.main_header {
+    text-align: center;
+    font-family: 'Creepster', cursive;
+    color: white;
+    font-size: 60px;
+    -webkit-text-stroke: 1px brown;
+}
+
+#main_text_container {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    justify-content: space-around;
+    height: 500px;
+    float: left;
+    background-color: #c0c0c0;
+}
+
+#login {
+    padding-top: 50px;
+    height: 400px;
+    width: 250px;
+    background-color: grey;
+}
+
+#register_bg {
+    padding-top: 50px;
+    height: 400px;
+    width: 250px;
+    background-color: grey;
+    opacity: 0.5;
+}
+
+#register_form {
+    padding-top: 50px;
+    height: 400px;
+    width: 250px;
+    background-color: grey;
+}
+
+#login_form {
+    padding-top: 15px;
+}
+
+#form {
+    padding-top: 50px;
+
+    float: right;
+    width: 30%;
+    height: 500px;
+    background-color: #d3d3d3;
+}
+
+#image_skater {
+    padding-top: 50px;
+    width: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    opacity: 1;
+}
+
+#image_thumbs_up {
+    padding-top: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 15%;
+}
+
+#petition-container {
+    padding-top: 50px;
+    width: 1150px;
+}
+
+#canvas {
+    border: 2px solid black;
+    background-color: white;
+}
+
+#main_text {
+    font-family: 'Baloo Bhai', cursive;
+    text-align: left;
+    color: black;
+    font-size: 20px;
+    padding-left: 30px;
+}
+
+#signer_container {
+    padding-top: 50px;
+}
+#signers_text {
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+    color: white;
+    font-size: 40px;
+}
+#thanks_container {
+    padding-top: 50px;
+}
+
+#thanks_text {
+    font-family: 'Pacifico', cursive;
+    color: white;
+    font-size: 35px;
+}
+
+#your_singature {
+    padding: 25px 0px;
+    width: 500px;
+}
+
+#more_info {
+    padding-top: 50px;
+    height: 400px;
+    width: 250px;
+    background-color: grey;
+}

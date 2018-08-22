@@ -1,0 +1,36 @@
+
+
+
+
+<div id="register_container">
+
+
+
+{{#if error}}
+<div id="error">
+    <p> FAILED TRY AGAIN </p>
+
+</div>
+{{/if }}
+
+<form id="more_info" method="POST" autocomplete="off">
+
+        <h1 class="main_header"> REGISTER </h1>
+        <br>
+        <br>
+        <input class="input-field" type="text" name="age" placeholder="age ..."/>
+        <br>
+        <br>
+        <input class="input-field" type="text" name="city" placeholder="city ..."/>
+        <br>
+        <br>
+        <input class="input-field" type="text" name="homepage" placeholder="homepage ..."/>
+        <br>
+        <br>
+        <input type="submit" class="submit-button" value="continue"/>
+                    <!-- put this in every form !!! -->
+        <input name="_csrf" value="{{csrfToken}}" type="hidden" />
+</form>
+
+
+</div>
