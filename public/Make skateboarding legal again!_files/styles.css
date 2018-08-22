@@ -124,6 +124,13 @@ body {
 
 #more_info {
     padding-top: 50px;
+    height: 620px;
+    width: 250px;
+    background-color: grey;
+}
+
+#change_info {
+    padding-top: 50px;
     height: 400px;
     width: 250px;
     background-color: grey;

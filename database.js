@@ -19,9 +19,36 @@ module.exports.newSignatureInDb = function newSignatureInDb(
 };
 
 module.exports.numbOfSig = function numbOfSig() {
-    console.log('we are in the signature slection');
+
     return db.query('SELECT * FROM signatures');
 };
+
+
+module.exports.allUserData = function allUserData() {
+
+    return db.query(`SELECT
+
+                        users.first_name,
+                        users.last_name,
+                        users.email,
+                        info.age,
+                        info.city,
+                        info.homepage
+                    FROM users
+                    JOIN info
+
+                    ON users.id = info.user_id`);
+
+};
+
+
+// module.export.changeInfo = function changeInfo() {
+//
+//
+//
+// }
+
+
 
 module.exports.newUser = function(first, last, email, pw) {
     return db.query(

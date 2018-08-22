@@ -80,43 +80,6 @@ app.use(
     })
 );
 
-////////petition get + post ///////////
-
-app.get('/petition', (req, res) => {
-    res.render('petition', {
-        layout: 'main'
-    });
-});
-
-app.post('/petition', (req, res) => {
-    if (
-        req.body.first_name == '' ||
-        req.body.last_name == '' ||
-        req.body.signature == ''
-    ) {
-        return res.render('petition', {
-            layout: 'main',
-            error: true
-        });
-    }
-    // console.log(req.body);
-    database
-        .newSignatureInDb(
-            req.body.first_name,
-            req.body.last_name,
-            req.body.hidden_input
-        )
-        .then(result => {
-            req.session.sigId = result.rows[0].id;
-            res.redirect('/thanks');
-        })
-        .catch(err => {
-            // console.log(err);
-            res.render('petition', {
-                layout: 'main'
-            });
-        });
-});
 
 ////////////////register get and post route///////////////
 
@@ -159,6 +122,38 @@ app.post('/', (req, res) => {
     });
     // console.log(first, last, email, password);
 });
+
+
+
+////////////////more info page//////////////
+
+app.get('/info', (req, res) => {
+    res.render('info', {
+        layout: 'main'
+    });
+});
+
+app.post('/info', (req, res) => {
+    // console.log(req.session.row, 'profile info');
+    database
+        .newInfo(
+            req.body.age,
+            req.body.city,
+            req.body.homepage,
+            req.session.user.userId
+        )
+        .then(response => {
+            res.redirect('/petition');
+        })
+        .catch(err => {
+            console.log('HERE');
+            res.render('info', {
+                layout: 'main',
+                error: true
+            });
+        });
+});
+// res.render('petition', { error: true });
 
 /////////////////login post and get ///////////////
 
@@ -213,6 +208,51 @@ app.post('/login', (req, res) => {
         });
 });
 
+
+
+////////petition get + post ///////////
+
+app.get('/petition', (req, res) => {
+    res.render('petition', {
+        layout: 'main'
+    });
+});
+
+app.post('/petition', (req, res) => {
+
+    console.log("1here");
+    if (
+        req.body.first_name == '' ||
+        req.body.last_name == '' ||
+        req.body.signature == ''
+    ) { console.log("2nd");
+        return res.render('petition', {
+            layout: 'main',
+            error: true
+        });
+    }
+    // console.log(req.body);
+    database
+        .newSignatureInDb(
+            req.body.first_name,
+            req.body.last_name,
+            req.body.hidden_input
+        )
+        .then(result => {
+            req.session.sigId = result.rows[0].id;
+            res.redirect('/thanks');
+        })
+        .catch(err => {
+            // console.log(err);
+            res.render('petition', {
+                layout: 'main'
+            });
+        });
+});
+
+
+
+
 /////////////////// Thank you page get route//////////////
 app.get('/thanks', checkForSigId, (req, res) => {
     database.numbOfSig().then(function(response) {
@@ -236,7 +276,7 @@ app.get('/thanks', checkForSigId, (req, res) => {
 //////////////// Signers page get & post/////////////
 
 app.get('/signers', checkForSigId, (req, res) => {
-    database.numbOfSig().then(function(response) {
+    database.allUserData().then(function(response) {
         res.render('signers', {
             layout: 'main',
             signers: response.rows
@@ -244,35 +284,21 @@ app.get('/signers', checkForSigId, (req, res) => {
     });
 });
 
-////////////////more info page//////////////
 
-app.get('/info', (req, res) => {
-    res.render('info', {
+//////////////// change info & post/////////////
+
+app.get('/change_info', (req, res) => {
+    res.render('change_info', {
         layout: 'main'
     });
 });
 
-app.post('/info', (req, res) => {
-    // console.log(req.session.row, 'profile info');
-    database
-        .newInfo(
-            req.body.age,
-            req.body.city,
-            req.body.homepage,
-            req.session.user.userId
-        )
-        .then(response => {
-            res.redirect('/petition');
-        })
-        .catch(err => {
-            console.log('HERE');
-            res.render('info', {
-                layout: 'main',
-                error: true
-            });
-        });
-});
-// res.render('petition', { error: true });
+
+
+
+
+
+
 
 /////////////LISTENING//////////////////////
 

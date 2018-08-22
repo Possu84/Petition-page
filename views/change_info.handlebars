@@ -1,0 +1,56 @@
+
+
+
+
+<div id="form_container">
+
+
+
+
+
+<form id="change_info" method="POST" autocomplete="off">
+
+        <h1 class="main_header"> Edit Your Profile </h1>
+        <br>
+        <br>
+        <input class="input-field" type="text" name="first" placeholder="first name ..."/>
+        <br>
+        <br>
+        <input class="input-field" type="text" name="last" placeholder="last name ..."/>
+        <br>
+        <br>
+        <input class="input-field" type="text" name="email" placeholder="email ..."/>
+        <br>
+        <br>
+        <input class="input-field" type="text" name="password" placeholder="password ..."/>
+        <br>
+        <br>
+        <input class="input-field" type="text" name="age" placeholder="age ..."/>
+        <br>
+        <br>
+        <input class="input-field" type="text" name="city" placeholder="city ..."/>
+        <br>
+        <br>
+        <input class="input-field" type="text" name="homepage" placeholder="homepage ..."/>
+        <br>
+        <br>
+        <input type="submit" class="submit-button" value="UPDATE"/>
+        <br>
+        <br>
+
+        <p > <a href="./thanks" id="thanks_text"> back </a> </p>
+
+        <!-- put this in every form !!! -->
+<input name="_csrf" value="{{csrfToken}}" type="hidden" />
+        <!-- every one of them -->
+
+        {{#if error}}
+        <div id="error">
+            <p> FAILED TRY AGAIN </p>
+
+        </div>
+        {{/if }}
+</form>
+
+
+</div>

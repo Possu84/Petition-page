@@ -4,7 +4,7 @@
 }
 
 body {
-    background-image: url('./park.jpg');
+    background-image: url('./park.jpeg');
     background-repeat: no-repeat;
 }
 
@@ -127,8 +127,16 @@ body {
     height: 400px;
     width: 250px;
     background-color: grey;
+    border-radius: 15px;
+
 }
 
+#change_info {
+    padding-top: 50px;
+    height: 550px;
+    width: 250px;
+    background-color: grey;
+}
 #ptext {
     font-family: 'Pacifico', cursive;
     color: white;
