@@ -17,8 +17,7 @@ CREATE TABLE users (
         first_name VARCHAR(255),
         last_name  VARCHAR(255),
         email      VARCHAR(255),
-        password   VARCHAR(255),
-        time_stamp VARCHAR(255)
+        password   VARCHAR(255)
 
     );
 
@@ -31,7 +30,7 @@ CREATE TABLE info (
         age         VARCHAR(255),
         city        VARCHAR(255),
         homepage    VARCHAR(255),
-        user_id     INTEGER NOT-NULL
+        user_id     INTEGER NOT NULL
 
 
     );
