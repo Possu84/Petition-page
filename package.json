@@ -15,6 +15,7 @@
     "dependencies": {
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.15.2",
+        "chalk-animation": "^1.6.0",
         "connect-redis": "^3.1.0",
         "cookie-parser": "^1.4.3",
         "cookie-session": "^2.0.0-alpha.1",

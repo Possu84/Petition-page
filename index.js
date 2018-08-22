@@ -148,7 +148,7 @@ app.post('/', (req, res) => {
                     last: last,
                     userId: responce.rows[0].id
                 };
-                res.redirect('/petition');
+                res.redirect('/info');
             })
             .catch(() => {
                 res.render('register', {
@@ -262,7 +262,7 @@ app.post('/info', (req, res) => {
             req.session.user.userId
         )
         .then(response => {
-            res.redirect('/');
+            res.redirect('/petition');
         })
         .catch(err => {
             console.log('HERE');
