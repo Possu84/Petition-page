@@ -91,7 +91,7 @@ body {
 }
 
 #main_text {
-    font-family: 'Baloo Bhai', cursive;
+    font-family: 'Amatic SC', cursive;
     text-align: left;
     color: black;
     font-size: 20px;
@@ -102,7 +102,7 @@ body {
     padding-top: 50px;
 }
 #signers_text {
-    font-family: 'Pacifico', cursive;
+    font-family: 'Amatic SC', cursive;
     text-align: center;
     color: white;
     font-size: 40px;
@@ -112,7 +112,7 @@ body {
 }
 
 #thanks_text {
-    font-family: 'Pacifico', cursive;
+    font-family: 'Amatic SC', cursive;
     color: white;
     font-size: 35px;
 }
@@ -128,7 +128,6 @@ body {
     width: 250px;
     background-color: grey;
     border-radius: 15px;
-
 }
 
 #change_info {
@@ -138,7 +137,7 @@ body {
     background-color: grey;
 }
 #ptext {
-    font-family: 'Pacifico', cursive;
+    font-family: 'Amatic SC', cursive;
     color: white;
     font-size: 25px;
 }
