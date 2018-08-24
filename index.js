@@ -9,13 +9,13 @@ const hb = require('express-handlebars');
 
 const c = require('chalk-animation');
 
-const pg = require('pg');
+// const pg = require('pg');
 
 const database = require('./database');
 
 var bcrypt = require('./bcrypt');
 
-var csurf = require('csurf');
+// var csurf = require('csurf');
 
 // const client = new pg.Client(
 //     'postgres://spicedling:password@localhost:5432/singature'
