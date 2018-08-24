@@ -6,17 +6,36 @@ const db = spicedPG('postgres:postgres:postgres@localhost:5432/petition');
 
 //////////////FUN////////////////////////
 
-module.exports.newSignatureInDb = function newSignatureInDb(
-    first_name,
-    last_name,
-    signature
-) {
+module.exports.newSignatureInDb = function newSignatureInDb(userId, signature) {
     //////the required parameters
     return db.query(
-        'INSERT INTO signatures (first_name, last_name, signature) VALUES ($1, $2, $3) RETURNING id',
-        [first_name || null, last_name || null, signature || null]
+        'INSERT INTO signatures (user_id, signature) VALUES ($1, $2) RETURNING id',
+
+        [userId, signature]
+
+        ///// ALWAYS EVERYWHERE IN THE SAME ORDER AS PARAM
     );
 };
+
+////////LOANED
+
+module.exports.checkUserLogin = email => {
+    return db
+        .query(`SELECT * FROM users WHERE email = $1`, [email || null])
+        .then(result => {
+            return result.rows[0];
+        });
+};
+
+module.exports.checkSignature = userId => {
+    return db
+        .query(`SELECT * FROM signatures WHERE user_id = $1`, [userId || null])
+        .then(result => {
+            return result.rows[0];
+        });
+};
+
+////////////////////////
 
 module.exports.numbOfSig = function numbOfSig() {
     return db.query('SELECT * FROM signatures');
@@ -106,8 +125,8 @@ module.exports.allInfo = function allInfo(
     );
 };
 
-module.exports.miscInfo = function miscInfo(age, city, homepage, user_id) {
-    console.log(age, city, homepage, user_id, 'inside misc module');
+module.exports.miscInfo = function miscInfo(age, city, homepage, userId) {
+    console.log(age, city, homepage, userId, 'inside misc module');
     return db.query(
         `
 
@@ -117,7 +136,7 @@ module.exports.miscInfo = function miscInfo(age, city, homepage, user_id) {
                 DO UPDATE SET age = $1, city = $2, homepage = $3
 
 `,
-        [age || null, city || null, homepage || null, user_id]
+        [age || null, city || null, homepage || null, userId]
     );
 };
 
