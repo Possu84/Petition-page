@@ -314,6 +314,7 @@ app.get('/change_info', (req, res) => {
     database
         .extractUserInfo(req.session.user.userId)
         .then(function(userInfo) {
+            console.log(userInfo.rows);
             res.render('change_info', {
                 layout: 'main',
                 userInfo: userInfo.rows
@@ -346,17 +347,16 @@ app.post('/change_info', (req, res) => {
                 );
                 database
                     .miscInfo(
-                        req.body.first_name,
-                        req.body.last_name,
-                        req.body.email,
+                        req.body.age,
+                        req.body.city,
+                        req.body.homepage,
                         req.session.user.userId
                     )
                     .then(() => {
                         console.log(
-                            req.body.first_name,
-                            req.body.last_name,
-                            req.body.email,
-                            req.body.password,
+                            req.body.age,
+                            req.body.city,
+                            req.body.homepage,
                             req.session.user.userId,
                             'misc Info Route'
                         );
