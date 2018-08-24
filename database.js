@@ -1,8 +1,10 @@
 ////////////////REQUIRMENTS///////////////
+const db = spicedPG(
+    process.env.DATABASE_URL ||
+        'postgres:postgres:postgres@localhost:5432/petition'
+);
 
 const spicedPG = require('spiced-pg');
-
-const db = spicedPG('postgres:postgres:postgres@localhost:5432/petition');
 
 //////////////FUN////////////////////////
 

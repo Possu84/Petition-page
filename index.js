@@ -433,5 +433,6 @@ app.post('/change_info', (req, res) => {
 /////////////LISTENING//////////////////////
 
 // app.listen(8080, () => console.log('listening'));
+app.listen(process.env.PORT || 8080, () => c.glitch('Listening and pistening'));
 
-app.listen(8080, () => c.glitch('Listening and pistening'));
+// app.listen(8080, () => c.glitch('Listening and pistening'));
