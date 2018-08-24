@@ -13,31 +13,34 @@
         <h1 class="main_header"> Edit Your Profile </h1>
         <br>
         <br>
-        <input class="input-field" type="text" name="first" placeholder="first name ..."/>
+
+        {{#each userInfo}}
+
+        <input class="input-field" type="text" name="first_name" placeholder="first name ..." value="{{first_name}}" />
         <br>
         <br>
-        <input class="input-field" type="text" name="last" placeholder="last name ..."/>
+        <input class="input-field" type="text" name="last_name" placeholder="last name ..." value="{{last_name}}"/>
         <br>
         <br>
-        <input class="input-field" type="text" name="email" placeholder="email ..."/>
+        <input class="input-field" type="text" name="email" placeholder="email ..." value="{{email}}"/>
         <br>
         <br>
         <input class="input-field" type="text" name="password" placeholder="password ..."/>
         <br>
         <br>
-        <input class="input-field" type="text" name="age" placeholder="age ..."/>
+        <input class="input-field" type="text" name="age" placeholder="age ..." value="{{age}}"/>
         <br>
         <br>
-        <input class="input-field" type="text" name="city" placeholder="city ..."/>
+        <input class="input-field" type="text" name="city" placeholder="city ..." value="{{city}}"/>
         <br>
         <br>
-        <input class="input-field" type="text" name="homepage" placeholder="homepage ..."/>
+        <input class="input-field" type="text" name="homepage" placeholder="homepage ..." value="{{homepage}}"/>
         <br>
         <br>
         <input type="submit" class="submit-button" value="UPDATE"/>
         <br>
         <br>
-
+         {{/each}}
         <p > <a href="./thanks" id="thanks_text"> back </a> </p>
 
         <!-- put this in every form !!! -->
@@ -45,7 +48,7 @@
         <!-- every one of them -->
 
         {{#if error}}
-        <div id="error">
+        <div class="error">
             <p> FAILED TRY AGAIN </p>
 
         </div>

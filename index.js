@@ -80,7 +80,6 @@ app.use(
     })
 );
 
-
 ////////////////register get and post route///////////////
 
 app.get('/', (req, res) => {
@@ -111,6 +110,7 @@ app.post('/', (req, res) => {
                     last: last,
                     userId: responce.rows[0].id
                 };
+                console.log(req.session, ' this is req session');
                 res.redirect('/info');
             })
             .catch(() => {
@@ -122,8 +122,6 @@ app.post('/', (req, res) => {
     });
     // console.log(first, last, email, password);
 });
-
-
 
 ////////////////more info page//////////////
 
@@ -173,7 +171,6 @@ app.post('/login', (req, res) => {
             // console.log(responce, 'responce');
             // because we are calling it from another file we need to write database.getUsers
             responce.rows.forEach(row => {
-                console.log(row, 'rowoowow');
                 // forEach loops through all the rows and arrays
 
                 if (email == row.email) {
@@ -188,6 +185,7 @@ app.post('/login', (req, res) => {
                                 userId: row.id
                             };
                             res.redirect('/petition');
+                            console.log(req.session, 'in the login screen');
                         } else {
                             console.log('error');
                             res.render('login', {
@@ -208,8 +206,6 @@ app.post('/login', (req, res) => {
         });
 });
 
-
-
 ////////petition get + post ///////////
 
 app.get('/petition', (req, res) => {
@@ -219,13 +215,13 @@ app.get('/petition', (req, res) => {
 });
 
 app.post('/petition', (req, res) => {
-
-    console.log("1here");
+    // console.log('1here');
     if (
         req.body.first_name == '' ||
         req.body.last_name == '' ||
         req.body.signature == ''
-    ) { console.log("2nd");
+    ) {
+        console.log('2nd');
         return res.render('petition', {
             layout: 'main',
             error: true
@@ -249,9 +245,6 @@ app.post('/petition', (req, res) => {
             });
         });
 });
-
-
-
 
 /////////////////// Thank you page get route//////////////
 app.get('/thanks', checkForSigId, (req, res) => {
@@ -284,21 +277,128 @@ app.get('/signers', checkForSigId, (req, res) => {
     });
 });
 
-
 //////////////// change info & post/////////////
 
 app.get('/change_info', (req, res) => {
-    res.render('change_info', {
-        layout: 'main'
-    });
+    database
+        .extractUserInfo(req.session.user.userId)
+        .then(function(userInfo) {
+            res.render('change_info', {
+                layout: 'main',
+                userInfo: userInfo.rows
+            });
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
 });
 
-
-
-
-
-
-
+app.post('/change_info', (req, res) => {
+    console.log('inside the post route 1');
+    if (req.body.password == '') {
+        console.log(req.body);
+        ///// the function parameters need to be same as in the refered module
+        database
+            .allExPass(
+                req.body.first_name,
+                req.body.last_name,
+                req.body.email,
+                req.session.user.userId
+            )
+            .then(() => {
+                console.log(
+                    req.body.first_name,
+                    req.body.last_name,
+                    req.body.email,
+                    req.session.user.userId,
+                    'all exept eMail post route'
+                );
+                database
+                    .miscInfo(
+                        req.body.first_name,
+                        req.body.last_name,
+                        req.body.email,
+                        req.body.password,
+                        req.session.user.userId
+                    )
+                    .then(() => {
+                        console.log(
+                            req.body.first_name,
+                            req.body.last_name,
+                            req.body.email,
+                            req.body.password,
+                            req.session.user.userId,
+                            'misc Info Route'
+                        );
+                        res.render('change_info', {
+                            layout: 'main'
+                        });
+                    })
+                    .catch(err => {
+                        console.log('post error 1', err);
+                        res.render('change_info', {
+                            layout: 'main'
+                        });
+                    });
+            })
+            .catch(err => {
+                console.log('post error 2', err);
+                res.render('change_info', {
+                    layout: 'main'
+                });
+            });
+    } else {
+        database
+            .allInfo(
+                req.body.first_name,
+                req.body.last_name,
+                req.body.email,
+                req.body.password,
+                req.session.user.userId
+            )
+            .then(() => {
+                console.log(
+                    req.body.first_name,
+                    req.body.last_name,
+                    req.body.email,
+                    req.body.password,
+                    req.session.user.userId,
+                    'all info on post route'
+                );
+                database
+                    .miscInfo(
+                        req.body.age,
+                        req.body.city,
+                        req.body.homepage,
+                        req.session.user.userId
+                    )
+                    .then(() => {
+                        console.log(
+                            req.body.age,
+                            req.body.city,
+                            req.body.homepage,
+                            req.session.user.userId,
+                            'inside post miscInfo'
+                        );
+                        res.render('change_info', {
+                            layout: 'main'
+                        });
+                    })
+                    .catch(err => {
+                        console.log('post error 3');
+                        res.render('change_info', {
+                            layout: 'main'
+                        });
+                    });
+            })
+            .catch(err => {
+                console.log('post error 4');
+                res.render('change_info', {
+                    layout: 'main'
+                });
+            });
+    }
+});
 
 /////////////LISTENING//////////////////////
 
