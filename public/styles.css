@@ -4,7 +4,7 @@
 }
 
 body {
-    background-image: url('./park.jpeg');
+    /* background-image: url('./park.jpeg'); */
     background-repeat: no-repeat;
 }
 
@@ -16,7 +16,18 @@ body {
     -webkit-text-stroke: 1px green;
 }
 
-.pic {
+.pic1 {
+    background-image: url('./skate1.jpeg');
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.pic2 {
     background-image: url('./park.jpeg');
     background-repeat: no-repeat;
     position: absolute;
@@ -27,8 +38,8 @@ body {
     z-index: -1;
 }
 
-.pic1 {
-    background-image: url('./park1.jpeg');
+.pic3 {
+    background-image: url('./skate2.jpeg');
     background-repeat: no-repeat;
     position: absolute;
     top: 0;
@@ -37,6 +48,51 @@ body {
     right: 0;
     z-index: -1;
 }
+
+.pic4 {
+    background-image: url('./skate4.jpeg');
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.pic5 {
+    background-image: url('./skate5.jpeg');
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.pic6 {
+    background-image: url('./skate6.jpg');
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.pic7 {
+    background-image: url('./skate7.jpg');
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
 #header {
     visibility: hidden;
     width: 100%;
