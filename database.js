@@ -26,14 +26,16 @@ module.exports.checkUserLogin = email => {
     return db
         .query(`SELECT * FROM users WHERE email = $1`, [email || null])
         .then(result => {
+            console.log(result.rows[0], 'email works!!!!!!');
             return result.rows[0];
         });
 };
 
-module.exports.checkSignature = userId => {
+module.exports.checkSignature = sig => {
     return db
-        .query(`SELECT * FROM signatures WHERE user_id = $1`, [userId || null])
+        .query(`SELECT * FROM signatures WHERE user_id = $1`, [sig || null])
         .then(result => {
+            console.log('inside chek sig');
             return result.rows[0];
         });
 };

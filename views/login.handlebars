@@ -4,12 +4,7 @@
 
 <div id="login">
 
-    {{#if error}}
-    <div class="error">
-        <p> FAILED TRY AGAIN </p>
 
-    </div>
-    {{/if }}
 
 
 <h1 class="main_header"> LOGIN </h1>
@@ -25,8 +20,18 @@
     <button type="submit"  name="button">SIGN IN</button>
     <br>
     <br>
+    <p > <a href="./" id="thanks_text"> Registration </a> </p>
+    <br>
+    <br>
+    {{#if error}}
+    <div class="error">
+        <p> FAILED TRY AGAIN </p>
+
+    </div>
+    {{/if }}
+
 </form>
 
-<p > <a href="./" id="thanks_text"> Registration </a> </p>
+
 
 </div>

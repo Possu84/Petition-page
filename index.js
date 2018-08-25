@@ -161,88 +161,88 @@ app.get('/login', (req, res) => {
     });
 });
 
-// app.post('/login', (req, res) => {
-//     // console.log(req.body, 'this is log post');
-//     let { email, password } = req.body;
-//
-//     database
-//         .getUsers()
-//         .then(responce => {
-//             // console.log(responce, 'responce');
-//             // because we are calling it from another file we need to write database.getUsers
-//             responce.rows.forEach(row => {
-//                 // forEach loops through all the rows and arrays
-//
-//                 if (email == row.email) {
-//                     console.log('checking pass', password, row.password);
-//                     //// we are looping the email row
-//                     bcrypt.checkPass(password, row.password).then(doesMatch => {
-//                         if (doesMatch) {
-//                             console.log('correct pass');
-//                             req.session.user = {
-//                                 first: row.first_name,
-//                                 last: row.last_name,
-//                                 userId: row.id
-//                             };
-//                             res.redirect('/petition');
-//                             console.log(req.session, 'in the login screen');
-//                         } else {
-//                             console.log('error');
-//                             res.render('login', {
-//                                 layout: 'main',
-//                                 error: true
-//                             });
-//                         }
-//                     });
-//                 }
-//             });
-//         })
-//         .catch(err => {
-//             console.log(err);
-//             res.render('login', {
-//                 layout: 'main',
-//                 error: true
-//             });
-//         });
-// });
-
 app.post('/login', (req, res) => {
+    // console.log(req.body, 'this is log post');
     let { email, password } = req.body;
 
     database
-        .checkUserLogin(email)
-        .then(user => {
-            // check if the user exists or not
-            return bcrypt.checkPass(password, user.password).then(doesMatch => {
-                if (doesMatch) {
-                    req.session.user.userId = user.id;
+        .getUsers()
+        .then(responce => {
+            // console.log(responce, 'responce');
+            // because we are calling it from another file we need to write database.getUsers
+            responce.rows.forEach(row => {
+                // forEach loops through all the rows and arrays
 
-                    database.checkSignature(req.session.userId).then(data => {
-                        if (data && data.id) {
-                            req.session.sigId = data.id;
-                            console.log(
-                                'user fully logged in whatup',
-                                req.session
-                            );
-                            res.redirect('/thanks');
-                        } else {
+                if (email == row.email) {
+                    console.log('checking pass', password, row.password);
+                    //// we are looping the email row
+                    bcrypt.checkPass(password, row.password).then(doesMatch => {
+                        if (doesMatch) {
+                            console.log('correct pass');
+                            req.session.user = {
+                                first: row.first_name,
+                                last: row.last_name,
+                                userId: row.id
+                            };
                             res.redirect('/petition');
+                            console.log(req.session, 'in the login screen');
+                        } else {
+                            console.log('error');
+                            res.render('login', {
+                                layout: 'main',
+                                error: true
+                            });
                         }
                     });
-                } else {
-                    return Promise.reject('password or email dont match');
                 }
             });
         })
-
         .catch(err => {
             console.log(err);
             res.render('login', {
                 layout: 'main',
-                error: 'error'
+                error: true
             });
         });
 });
+
+// app.post('/login', (req, res) => {
+//     let email = req.body.email;
+//     let password = req.body.password;
+//
+//     database
+//         .checkUserLogin(email)
+//         .then(user => {
+//             console.log('checking user.pass. it is', user.password, password);
+//             return bcrypt.checkPass(password, user.password).then(status => {
+//                 if (status) {
+//                     console.log('correct pass');
+//                     req.session.user = row.id;
+//
+//                     database
+//                         .checkSignature(req.session.user.userId)
+//                         .then(sig => {
+//                             if (sig) {
+//                                 req.session.user.sigId = sig.id;
+//                                 res.redirect('/signers');
+//                             } else {
+//                                 res.redirect('/petition');
+//                             }
+//                         });
+//                 } else {
+//                     return Promise.reject('password or email dont match');
+//                 }
+//             });
+//         })
+//
+//         .catch(err => {
+//             console.log(err);
+//             res.render('login', {
+//                 layout: 'main',
+//                 error: 'error'
+//             });
+//         });
+// });
 
 ////////petition get + post ///////////
 
@@ -378,56 +378,67 @@ app.post('/change_info', (req, res) => {
                 });
             });
     } else {
-        database
-            .allInfo(
-                req.body.first_name,
-                req.body.last_name,
-                req.body.email,
-                req.body.password,
-                req.session.user.userId
-            )
-            .then(() => {
-                console.log(
+        bcrypt.hashPass(req.body.password).then(hashedpass => {
+            console.log(hashedpass);
+
+            database
+                .allInfo(
                     req.body.first_name,
                     req.body.last_name,
                     req.body.email,
-                    req.body.password,
-                    req.session.user.userId,
-                    'all info on post route'
-                );
-                database
-                    .miscInfo(
-                        req.body.age,
-                        req.body.city,
-                        req.body.homepage,
-                        req.session.user.userId
-                    )
-                    .then(() => {
-                        console.log(
+                    hashedpass,
+                    req.session.user.userId
+                )
+                .then(() => {
+                    console.log(
+                        req.body.first_name,
+                        req.body.last_name,
+                        req.body.email,
+                        req.body.password,
+                        req.session.user.userId,
+                        'all info on post route'
+                    );
+                    database
+                        .miscInfo(
                             req.body.age,
                             req.body.city,
                             req.body.homepage,
-                            req.session.user.userId,
-                            'inside post miscInfo'
-                        );
-                        res.render('change_info', {
-                            layout: 'main'
+                            req.session.user.userId
+                        )
+                        .then(() => {
+                            console.log(
+                                req.body.age,
+                                req.body.city,
+                                req.body.homepage,
+                                req.session.user.userId,
+                                'inside post miscInfo'
+                            );
+                            res.render('change_info', {
+                                layout: 'main'
+                            });
+                        })
+                        .catch(err => {
+                            console.log('post error 3', err);
+                            res.render('change_info', {
+                                layout: 'main'
+                            });
                         });
-                    })
-                    .catch(err => {
-                        console.log('post error 3');
-                        res.render('change_info', {
-                            layout: 'main'
-                        });
+                })
+                .catch(err => {
+                    console.log('post error 4', err);
+                    res.render('change_info', {
+                        layout: 'main'
                     });
-            })
-            .catch(err => {
-                console.log('post error 4');
-                res.render('change_info', {
-                    layout: 'main'
                 });
-            });
+        });
     }
+});
+
+/////////////LOGOUT/////////////
+
+app.get('/logout', (req, res) => {
+    req.session = null;
+    res.redirect('/login');
 });
 
 /////////////LISTENING//////////////////////

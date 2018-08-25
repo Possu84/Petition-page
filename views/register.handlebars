@@ -28,12 +28,14 @@
         <br>
         <br>
         <input type="submit" class="submit-button" value="sign up"/>
-                    <!-- put this in every form !!! -->
+                    <!-- put this csrfToken in every form !!! -->
         <input name="_csrf" value="{{csrfToken}}" type="hidden" />
-
+                    <!-- put this csrfToken in every form !!! -->
         <br>
         <br>
         <p > <a href="./login" id="thanks_text"> or login </a> </p>
+        
+        <br>
         {{#if error}}
         <div class="error">
             <p> FAILED TRY AGAIN </p>
