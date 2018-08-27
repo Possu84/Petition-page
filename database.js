@@ -40,7 +40,19 @@ module.exports.checkSignature = sig => {
         });
 };
 
-////////////////////////
+////////DELETE SIGNATURE////////////////////////
+
+module.exports.deleteSig = function(sigId) {
+    console.log('deleting sig');
+    return db.query(
+        `
+       DELETE FROM signatures
+       WHERE id = $1`,
+        [sigId || null]
+    );
+};
+
+/////////////////
 
 module.exports.numbOfSig = function numbOfSig() {
     return db.query('SELECT * FROM signatures');

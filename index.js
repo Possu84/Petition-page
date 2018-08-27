@@ -247,9 +247,13 @@ app.post('/login', (req, res) => {
 ////////petition get + post ///////////
 
 app.get('/petition', (req, res) => {
-    res.render('petition', {
-        layout: 'main'
-    });
+    if (req.session.sigId) {
+        res.redirect('/thanks');
+    } else {
+        res.render('petition', {
+            layout: 'main'
+        });
+    }
 });
 
 app.post('/petition', (req, res) => {
@@ -297,6 +301,12 @@ app.get('/thanks', checkForSigId, (req, res) => {
     });
 });
 
+app.post('/thanks', (req, res) => {
+    database.deleteSig(req.session.sigId).then(function() {
+        req.session.sigId = null;
+        res.redirect('/petition');
+    });
+});
 //////////////// Signers page get & post/////////////
 
 app.get('/signers', checkForSigId, (req, res) => {
