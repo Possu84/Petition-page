@@ -42,7 +42,7 @@ module.exports.checkSignature = sig => {
 
 ////////DELETE SIGNATURE////////////////////////
 
-module.exports.deleteSig = function(sigId) {
+module.exports.deleteSig = sigId => {
     console.log('deleting sig');
     return db.query(
         `
@@ -96,7 +96,7 @@ module.exports.allExPass = function allExPass(
     );
 };
 
-module.exports.extractUserInfo = function extractUserInfo(id) {
+module.exports.extractUserInfo = id => {
     return db.query(
         `
         SELECT users.first_name, users.last_name, users.email, info.age, info.city, info.homepage

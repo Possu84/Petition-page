@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:8080/ -->
+<html class="gr__localhost"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="./localhost_files/styles.css">
+
+    <title></title>
+</head>
+<body data-gr-c-s-loaded="true" data-feedly-mini="yes">
+
+
+
+    <div id="wraper">
+
+        <div id="main"><div id="input_form"><form><input type="text" name="title" placeholder="title"> <input type="text" name="description" placeholder="description"> <input type="text" name="username" placeholder="username"> <input type="file" accept="image/*"> <button> upload to the ether</button></form></div> <div><img src="./localhost_files/ImwxDpy37NhQ3F92FLP5txSR4_Bagoho.jpg" class="image"> <p> 222</p> <p> 2222</p></div><div><img src="./localhost_files/9a4vM26F074diKLcF1D-gKszqd1u8lfI.jpg" class="image"> <p> adsa</p> <p> dadas</p></div><div><img src="./localhost_files/gyI-NQCwE2JKT48AknvtUe8tLsAM643U.jpg" class="image"> <p> lll</p> <p> lll</p></div><div><img src="./localhost_files/XCv4AwJdm6QuzjenFPKJocpipRNNMwze.jpg" class="image"> <p> Hello Berlin</p> <p> This is going to be worth a lot of money one day.</p></div><div><img src="./localhost_files/wg8d94G_HrWdq7bU_2wT6Y6F3zrX-kej.jpg" class="image"> <p> Elvis</p> <p> We can't go on together with suspicious minds.</p></div><div><img src="./localhost_files/MQwozP4QM5uK84XgPs4Q0oUIVWiwzN-w.jpg" class="image"> <p> Welcome to Berlin and the future!</p> <p> This photo brings back so many great memories.</p></div> <div id="pop-up"><div id="modal-text"><img src="./localhost_files/ImwxDpy37NhQ3F92FLP5txSR4_Bagoho.jpg" id="pop-pic"> <p>XXX</p> <h1>Junk Pic´s</h1> <h1>Title: 222</h1> <h1>Desc: 2222</h1> <h1>Username: 2222</h1> <br> <br> <input type="text" name="username" placeholder="username"> <br> <br> <input id="comment" type="text" name="comment" placeholder="comment"> <br> <br> <button> upload comment</button> <br> <br> <div id="comment-field"> afafasd faspf 2018-08-31T10:20:51.978Z</div><div id="comment-field"> afafasd faspf 2018-08-31T10:22:51.988Z</div><div id="comment-field"> asdasd asdsa 2018-08-31T10:24:04.237Z</div><div id="comment-field"> asdasd asdsa 2018-08-31T10:26:04.253Z</div><div id="comment-field"> asdasdsad dasdsa 2018-08-31T10:37:27.258Z</div><div id="comment-field">   2018-08-31T10:49:47.813Z</div></div></div> <button> MORE </button></div>
+
+    <!-- refrence to template-->
+    <script id="modal-wrap" @changed="hide" type="text/template">
+       <div id="pop-up">
+
+
+           <div id="modal-text">
+               <img  v-bind:src="image.url" id="pop-pic">
+               <p >XXX</p>
+               <h1>{{heading}}</h1>
+               <h1>Title: {{image.title}}</h1>
+               <h1>Desc: {{image.description}}</h1>
+               <h1>Username: {{image.username}}</h1>
+               <br>
+               <br>
+               <input v-model = 'newcomment.username'  type="text" name="username" placeholder="username">
+               <br>
+               <br>
+               <input v-model = 'newcomment.comment'  id="comment"  type="text" name="comment" placeholder="comment">
+                <br>
+                <br>
+               <button v-on:click= 'uploadComment'> upload comment</button>
+               <br>
+               <br>
+               <div  v-for="comment in comments" id="comment-field"> {{comment.comment}} {{comment.username}} {{comment.created_at}}</div>
+           </div>  <!-- end modal-text-->
+
+
+       </div> <!-- end pop-up div-->
+   </script><!-- end modal-wrap-->
+
+        <script src="./localhost_files/jquery-3.3.1.min.js"></script>
+        <script src="./localhost_files/axios.min.js"></script>
+        <script src="./localhost_files/vue.js"></script>
+        <script src="./localhost_files/axios.min(1).js"></script>
+        <script src="./localhost_files/script.js"></script>
+
+
+    
+    </div>
+
+
+
+<div id="feedly-mini" title="feedly Mini tookit"></div></body></html>
